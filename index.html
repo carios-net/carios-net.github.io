@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>My Site</title>
-</head>
-<body>
-  Hello World!
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Carios' Homepage</title>
+  </head>
+  <frameset rows="40,*,40" border="2" bordercolor="#ffffff">
+    <noframes>
+      このページはフレーム対応のブラウザでご覧ください。
+    </noframes>
+    <frame src="message.html" name="message" scrolling="no">
+    <frameset cols="200,*">
+      <frame src="menu.html" name="sidebar">
+      <frame src="welcome.html" name="main">
+    </frameset>
+    <frame src="credit.html" name="credit" scrolling="no">
+  </frameset>
 </html>

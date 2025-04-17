@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body bgcolor="lightcyan" background="28920.gif" text="black" link="blue" vlink="purple" alink="red">
+  <blink><marquee><b><font size="4" color="#ff0011">
+    This is real hardcore Japanese-internet-style homepage. Still online. Still weird. We never logged off.
+  </font></b></marquee></blink>
+  <script>
+    setInterval(function () {
+      const blinks = document.querySelectorAll('blink');
+      blinks.forEach(function (el) {
+        el.style.visibility = (el.style.visibility === 'hidden') ? 'visible' : 'hidden';
+      });
+    }, 500);
+  </script>
+</body>
+</html>
