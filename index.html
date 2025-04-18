@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="robots" content="noindex, nofollow">
     <title>Carios' Homepage</title>
+    <script>
+      function setHueRotationOnce(deg) {
+        const framesToUpdate = [frames['sidebar'], frames['main']];
+        framesToUpdate.forEach(f => {
+          try {
+            const body = f.document.body;
+            body.style.transition = 'filter 600s linear'; // 10分間のゆっくり変化
+            body.style.filter = `hue-rotate(${deg}deg)`;  // ここで360deg指定
+          } catch (e) {
+            console.warn("Frame access failed", e);
+          }
+        });
+      }
+
+      // ページロード後すぐ一回だけ発火
+      setTimeout(() => setHueRotationOnce(360), 100);
+    </script>
   </head>
   <frameset rows="40,*,40" border="2" bordercolor="#ffffff">
     <noframes>
