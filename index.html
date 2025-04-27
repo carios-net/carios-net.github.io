@@ -10,16 +10,49 @@
         framesToUpdate.forEach(f => {
           try {
             const body = f.document.body;
-            body.style.transition = 'filter 600s linear'; // 10分間のゆっくり変化
-            body.style.filter = `hue-rotate(${deg}deg)`;  // ここで360deg指定
+            body.style.transition = 'filter 800s linear';
+            body.style.filter = `hue-rotate(${deg}deg)`;
           } catch (e) {
             console.warn("Frame access failed", e);
           }
         });
       }
+      setTimeout(() => setHueRotationOnce(360), 6000);
 
-      // ページロード後すぐ一回だけ発火
-      setTimeout(() => setHueRotationOnce(360), 100);
+      const chars = {
+        c: ['⊂', 'ƈ','ꛕ','☾','ᛈ','ᙅ','𐌂','₵','𝕔','𝚌'],
+        a: ['ꪖ', '⍲', 'ⲁ','á͉͎̬̝̫','₳','ɐ','ⓐ','ǟ','𐌀'],
+        r: ['☈', 'Ɽ','Ʀ','𝖗','𝕣'],
+        i: ['ᶤ', '⟟','ꛈ','ɨ','𝐢','𝒊','𝔦'],
+        o: ['ᴼ','⊙', 'օ','Ơ','ዐ','Ѻ','𝓸','Ø','𖣠','o͓̊'],
+        s: ['⳽', '𐌔','𝔰','ⓢ','ᔕ','Ƨ','𐌔','ꕷ','ᛢ']
+      };
+
+      function getRandom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      function generateCarios() {
+        return getRandom(chars.c) +
+              getRandom(chars.a) +
+              getRandom(chars.r) +
+              getRandom(chars.i) +
+              getRandom(chars.o) +
+              getRandom(chars.s);
+      }
+
+      function generateAndScheduleNext() {
+        const titleTag = document.querySelector('title');
+        if (!titleTag) return;
+
+        const text = generateCarios();
+        titleTag.textContent = text + "' Homepage";
+
+        const nextDelay = 1500 + Math.random() * 6000;
+        setTimeout(generateAndScheduleNext, nextDelay);
+      }
+
+      setTimeout(generateAndScheduleNext, 7000);
     </script>
   </head>
   <frameset rows="40,*,40" border="2" bordercolor="#ffffff">
