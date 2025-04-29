@@ -22,10 +22,10 @@
       const chars = {
         c: ['⊂', 'ƈ','ꛕ','☾','ᛈ','ᙅ','𐌂','₵','𝕔','𝚌'],
         a: ['ꪖ', '⍲', 'ⲁ','á͉͎̬̝̫','₳','ɐ','ⓐ','ǟ','𐌀'],
-        r: ['☈', 'Ɽ','Ʀ','𝖗','𝕣'],
-        i: ['ᶤ', '⟟','ꛈ','ɨ','𝐢','𝒊','𝔦'],
+        r: ['☈', 'Ɽ','Ʀ','𝖗','𝕣','𝓻','ʀ','ⓡ','🆁','ᖇ','я','𖦪'],
+        i: ['ᶤ', '⟟','ꛈ','ɨ','𝐢','𝒊','𝔦','𝕚','𝐼̮̑','ⓘ'],
         o: ['ᴼ','⊙', 'օ','Ơ','ዐ','Ѻ','𝓸','Ø','𖣠','o͓̊'],
-        s: ['⳽', '𐌔','𝔰','ⓢ','ᔕ','Ƨ','𐌔','ꕷ','ᛢ']
+        s: ['⳽', '𐌔','𝔰','ⓢ','ᔕ','Ƨ','𐌔','ꕷ','ᛢ','⚡︎']
       };
 
       function getRandom(arr) {
@@ -41,6 +41,8 @@
               getRandom(chars.s);
       }
 
+      const startTime = Date.now(); // ページを開いた時間を記録
+
       function generateAndScheduleNext() {
         const titleTag = document.querySelector('title');
         if (!titleTag) return;
@@ -48,11 +50,21 @@
         const text = generateCarios();
         titleTag.textContent = text + "' Homepage";
 
-        const nextDelay = 1500 + Math.random() * 6000;
+        const elapsed = (Date.now() - startTime) / 1000; // 経過秒数
+
+        // --- 更新間隔を決める ---
+        // 0〜120秒で徐々に短くなる（7秒→0.1秒）
+        const progress = Math.min(elapsed / 150, 1); // 0〜1に正規化
+        const maxDelay = 10000; // 最初の最大間隔（ms）
+        const minDelay = 50;  // 最終的な最小間隔（ms）
+
+        const nextDelay = maxDelay - (maxDelay - minDelay) * progress;
+        
         setTimeout(generateAndScheduleNext, nextDelay);
       }
 
-      setTimeout(generateAndScheduleNext, 7000);
+      // 初回スタート（7秒後）
+      setTimeout(generateAndScheduleNext, 10000);
     </script>
   </head>
   <frameset rows="40,*,40" border="2" bordercolor="#ffffff">
